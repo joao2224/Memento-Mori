@@ -56,3 +56,15 @@ footer {
     margin-bottom: 100px;
 
 }
+
+.invalid-feedback {
+    display: block;
+  }
+  
+  .form-control {
+    margin-bottom: 10px;
+  }
+
+  .container {
+    margin-top: -160px;
+  }
