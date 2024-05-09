@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MementoMori</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+<body class="text-bg-dark p-3" style="text-align: center;">
+    <header>
+        <h1>MementoMori</h1>
+    </header>
+
+    <nav>
+        <ul>
+            <h3>Representação visual do meses que ainda faltam para a morte:</h3>
+           
+        </ul>
+    </nav>
+
+    <main id="main-container">
+        <script>
+            function getCookie(name) {
+                const value = `; ${document.cookie}`;
+                const parts = value.split(`; ${name}=`);
+                if (parts.length === 2) return parts.pop().split(';').shift();
+            }
+        
+            const urlsImagens = [
+                'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#D8DADF" class="bi bi-square-fill" viewBox="0 0 16 16"><path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2z"/></svg>'),
+                'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#D8DADF" class="bi bi-square" viewBox="0 0 16 16"><path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"/></svg>')
+            ];
+        
+            // Obtendo a referência do elemento onde as imagens serão inseridas
+            const container = document.getElementById('main-container');
+        
+            const colunas = 12;
+            const linhas = 75;
+            let numero_meses = parseInt(getCookie('idadeEmMeses')) || 0;
+        
+            // Loop para criar tags <img> dinamicamente
+            for (let i = 0; i < linhas; i++) {
+                for(let j = 0; j < colunas; j++) {
+                    const img = document.createElement('img');
+                    if (numero_meses > 0) {
+                        img.src = urlsImagens[0];
+                        numero_meses--;
+                    }
+                    else {
+                        img.src = urlsImagens[1];
+                    }
+                    container.appendChild(img);  
+                }
+            }
+        </script>
+    </main>
+
+    <footer>
+        <!-- Rodapé -->
+        <h3>Porcentagem da vida ja vivida:</h3>
+        <h2 id="valor-constante"></h2>
+
+        <script>
+            // Definindo a constante
+            const minhaConstante =  Math.floor((getCookie('idadeEmMeses')/900) *100);
+            const elementoHTML = document.getElementById('valor-constante');
+            elementoHTML.innerText = minhaConstante + "%";
+        </script>
+    
+    </footer>
+</body>
+</html>
